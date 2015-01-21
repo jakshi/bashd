@@ -1,6 +1,13 @@
 # CHANGELOG for bashd
 
 This file is used to list changes made in each version of bashd.
+
+## 0.1.0:
+
+* Add: README file
+* Modify: make snippet name - name attribute and user name - usual attribute
+* Modify: change attribute name that specify template name from: template to: source
+
 ## 0.0.1:
 
 * Initial release of bashd
