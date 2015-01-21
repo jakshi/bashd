@@ -18,17 +18,16 @@
 # limitations under the License.
 #
 
-bashd_entry 'root' do
-  snippet 'test1'
+bashd_entry 'test1' do
+  user 'root'
   action :create
 end
 
-bashd_entry 'root' do
-  snippet 'test2'
+bashd_entry 'test2' do
+  user 'root'
   action :create
 end
 
-bashd_entry 'root' do
-  snippet 'test2'
+bashd_entry 'test2' do
   action :remove
 end

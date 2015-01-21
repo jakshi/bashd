@@ -21,8 +21,8 @@
 actions :create, :remove 
 default_action :create
 
-attribute :user, :kind_of => [String, NilClass], :name_attribute => true, :default => 'root'
-attribute :snippet, :kind_of => [String, NilClass], :required => true, :default => nil
+attribute :snippet, :kind_of => [String, NilClass], :name_attribute => true, :default => nil
+attribute :user, :kind_of => [String, NilClass], :default => 'root'
 attribute :cookbook, :kind_of => [String, NilClass], :default => nil
-attribute :template, :kind_of => [String, NilClass], :default => nil
+attribute :source, :kind_of => [String, NilClass], :default => nil
 attribute :variables, :kind_of => Hash, :default => {}

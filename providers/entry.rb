@@ -35,7 +35,7 @@ action :create do
   
   template "#{buser_home}/.bash.d/#{new_resource.snippet}.sh" do
     cookbook new_resource.cookbook if new_resource.cookbook
-    source new_resource.template if new_resource.template
+    source new_resource.source if new_resource.source
     mode 0755
     user buser
     group buser

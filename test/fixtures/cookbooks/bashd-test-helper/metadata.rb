@@ -5,7 +5,7 @@ maintainer_email 'gshaud@gmail.com'
 license          'Apache 2.0'
 description      'Cookbook for testing bashd LWRP'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.0.1'
+version          '0.1.0'
 
 recipe 'default', 'calls bashd LWRP for testing purposes'
 
