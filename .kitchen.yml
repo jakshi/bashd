@@ -1,0 +1,59 @@
+<% def digitalocean_driver
+@text = <<EOT
+---
+driver:
+  name: digitalocean
+  region: sfo1
+  size: 512mb
+EOT
+@text += "  ssh_key: #{ENV['DIGITALOCEAN_SSH_KEY_PATH']}" unless ENV['DIGITALOCEAN_SSH_KEY_PATH'].nil?
+@text += <<EOT
+
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: debian-7-0-x64
+
+suites:
+  - name: default
+    run_list:
+      - recipe[bashd-test-helper::default]
+    attributes:
+EOT
+end %>
+
+<% def vagrant_driver
+@text = <<EOT
+---
+driver_plugin: vagrant
+
+platforms:
+- name:  debian-7.4
+  driver:
+    provider: virtualbox
+    customize:
+      memory: 512
+
+suites:
+  - name: default
+    run_list:
+      - recipe[bashd-test-helper::default]
+    attributes:
+EOT
+end %>
+
+<%
+case ENV['TEST_KITCHEN_DRIVER']
+  when 'digitalocean'
+    puts 'Using DigitalOcean test-kitchen driver'
+    _erbout << digitalocean_driver
+  when 'vagrant'
+    puts 'Using Vagrant test-kitchen driver'
+    _erbout << vagrant_driver
+  else
+    puts "Unknown test-kitchen driver \'#{ENV['TEST_KITCHEN_DRIVER']}\', using Vagrant test-kitchen driver"
+    _erbout << vagrant_driver
+end
+%>
