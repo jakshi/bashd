@@ -39,7 +39,7 @@ def install_bashd(user,home)
   # Create dir for bash scriptlets
   directory "#{home}/.bash.d" do
     user user
-    group user
+    group Etc.getpwnam(user).gid
     mode 0775
   end
 

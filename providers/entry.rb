@@ -38,7 +38,7 @@ action :create do
     source new_resource.source if new_resource.source
     mode 0755
     user buser
-    group buser
+    group Etc.getpwnam(buser).gid
     variables(new_resource.variables)
   end  
 end
