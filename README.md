@@ -60,20 +60,23 @@
 Add bashd cookbook to your metadata.rb dependency, like:
 
 ```
-depends 'bashd', '~> 0.0.2'
+depends 'bashd', '~> 0.2.0'
 ```
 
 #### Install bashd
 Add to recipe:
 
+```
 bashd 'username'
+```
 
 This will:
 
 * create `username_home_dir_from_passwd_file/.bash.d` folder
+* The folder will have **username** as owner, and **username**'s primary group as a group.
 * Add directive to **.bash.rc** file to include any .sh file from ~/.bash.d folder
 
-When no user specified, this will happen to root (default user).
+When no user specified, **username** will be root (by default).
  
 #### Create snippet
 To create new snippet:
@@ -89,7 +92,8 @@ bashd_entry 'snippet_name' do
   action :create
 end
 
-This will create **~/.bash.d/snippet_name.sh** snippet in **~/.bash.d** dir, from snippet_name.sh.erb template.
+* This will create **~/.bash.d/snippet_name.sh** snippet in **~/.bash.d** dir, from snippet_name.sh.erb template.
+* The snippet will have **username** as owner, and **username**'s primary group as a group.
 
 #### Delete snippet
 Add to your recipe:

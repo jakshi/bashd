@@ -2,6 +2,12 @@
 
 This file is used to list changes made in each version of bashd.
 
+## 0.2.0:
+
+* Add: reads the actual group id from /etc/passwd rather than relying on
+	the user and group name being equal
+* Modify: update documentation
+
 ## 0.1.0:
 
 * Add: README file
