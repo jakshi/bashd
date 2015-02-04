@@ -87,10 +87,12 @@ To create new snippet:
 
 Add to your recipe:
 
+```
 bashd_entry 'snippet_name' do
   user 'username'
   action :create
 end
+```
 
 * This will create **~/.bash.d/snippet_name.sh** snippet in **~/.bash.d** dir, from snippet_name.sh.erb template.
 * The snippet will have **username** as owner, and **username**'s primary group as a group.
@@ -98,10 +100,12 @@ end
 #### Delete snippet
 Add to your recipe:
 
+```
 bashd_entry 'snippet_name' do
   user 'username'
   action :remove
 end
+```
 
 This will remove **~/.bash.d/snippet_name.sh** snippet for user username.
 
