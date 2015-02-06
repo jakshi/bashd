@@ -1,6 +1,6 @@
 # bashd
 
-* This cookbook provide LWRPs for managing .bash.d snippets for some user.
+* This cookbook provide LWRPs for managing **.bash.d** snippets for some user.
 * Those snthat will be executed on user login, and very useful for setupping user's environment variables, bash prompt and so on stuff.
 * Also it allows you to well structure these scripts.
 
@@ -17,6 +17,23 @@
 
 <a name="attributes">
 ## Attributes
+### bashd resource
+<table>
+  <tr>
+    <th>Attribute</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><tt>user</tt></td>
+    <td>String</td>
+    <td>User who will get .bash.d snippets. Name attribute.</td>
+    <td><tt>root</tt></td>
+  </tr>
+</table>
+
+### bashd_entry resource
 <table>
   <tr>
     <th>Attribute</th>
@@ -27,7 +44,7 @@
   <tr>
     <td><tt>snippet</tt></td>
     <td>String</td>
-    <td>Snippet name, and at the same time .sh.erb template name (if template source isn't specified)</td>
+    <td>Snippet name, and at the same time .sh.erb template name (if template source isn't specified). Name attribute</td>
     <td><tt>nil</tt></td>
   </tr>
   <tr>
@@ -54,6 +71,12 @@
     <td>Hash with variables that should be passed to snippets template</td>
     <td><tt>{}</tt></td>
   </tr>
+  <tr>
+    <td><tt>content</tt></td>
+    <td>String</td>
+    <td>Alternate method to specify snippet content. Just add it to this attribute. template/source/variables attribute will be ignored if this attribute is not **nil**</td>
+    <td><tt>nil</tt></td>
+  </tr>
 </table>
 
 ## Usage
@@ -74,12 +97,13 @@ This will:
 
 * create `username_home_dir_from_passwd_file/.bash.d` folder
 * The folder will have **username** as owner, and **username**'s primary group as a group.
-* Add directive to **.bash.rc** file to include any .sh file from ~/.bash.d folder
+* Add directive to **.bash.rc** file to include any **.sh** file from `~/.bash.d` folder
 
-When no user specified, **username** will be root (by default).
+When no user specified, **username** will be **root** (by default).
  
 #### Create snippet
-To create new snippet:
+##### With template
+To create new snippet with template:
 
 * create erb template for snippet
 * if it has **snippet_name.sh.erb** (snippet_name same as snippet attribute) name it will be used automagically
@@ -94,7 +118,24 @@ bashd_entry 'snippet_name' do
 end
 ```
 
-* This will create **~/.bash.d/snippet_name.sh** snippet in **~/.bash.d** dir, from snippet_name.sh.erb template.
+* This will create **~/.bash.d/snippet_name.sh** snippet in **~/.bash.d** dir, from **snippet_name.sh.erb** template.
+* The snippet will have **username** as owner, and **username**'s primary group as a group.
+
+##### With a content attribute
+To create new snippet with a content attribute:
+
+* if you use content attribute it will override any template/source/variables attributes.
+* By default content attribute is **nil**
+
+```ruby
+bashd_entry 'snippet_name' do
+  user 'username'
+  content 'export FOO=bar'
+  action :create
+end
+```
+
+* This will create **~/.bash.d/snippet_name.sh** snippet in **~/.bash.d** dir, from content attribute.
 * The snippet will have **username** as owner, and **username**'s primary group as a group.
 
 #### Delete snippet

@@ -28,6 +28,14 @@ bashd_entry 'test2' do
   action :create
 end
 
+bashd_entry 'test3' do
+  user 'root'
+  content <<EOC
+export SNIPPET3='snippet 3'
+EOC
+  action :create
+end
+
 bashd_entry 'test2' do
   action :remove
 end

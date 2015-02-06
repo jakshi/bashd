@@ -25,4 +25,5 @@ attribute :snippet, :kind_of => [String, NilClass], :name_attribute => true, :de
 attribute :user, :kind_of => [String, NilClass], :default => 'root'
 attribute :cookbook, :kind_of => [String, NilClass], :default => nil
 attribute :source, :kind_of => [String, NilClass], :default => nil
+attribute :content, :kind_of => [String, NilClass], :default => nil
 attribute :variables, :kind_of => Hash, :default => {}

@@ -28,19 +28,32 @@ use_inline_resources
 
 action :create do
   buser = new_resource.user
+  bgroup = Etc.getpwnam(buser).gid
   buser_home = Etc.getpwnam(new_resource.user).dir
 
   bashd_install = bashd new_resource.user
   bashd_install.run_action(:install)
-  
-  template "#{buser_home}/.bash.d/#{new_resource.snippet}.sh" do
-    cookbook new_resource.cookbook if new_resource.cookbook
-    source new_resource.source if new_resource.source
-    mode 0755
-    user buser
-    group Etc.getpwnam(buser).gid
-    variables(new_resource.variables)
-  end  
+
+  if new_resource.content.nil?
+    template "#{buser_home}/.bash.d/#{new_resource.snippet}.sh" do
+      cookbook new_resource.cookbook if new_resource.cookbook
+      source new_resource.source if new_resource.source
+      mode 0755
+      user buser
+      group bgroup
+      variables(new_resource.variables)
+    end
+  else
+    file "#{buser_home}/.bash.d/#{new_resource.snippet}.sh" do
+      content <<-EOH
+# Managed by Chef. Local changes will be overwritten.
+#{new_resource.content}
+      EOH
+      mode 0755
+      owner buser
+      group bgroup
+    end      
+  end
 end
 
 action :remove do

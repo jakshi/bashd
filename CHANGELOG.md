@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of bashd.
 
+## 0.3.0
+
+* Add: content attribute to define .bash.d snippets inside bashd_entry resource.
+* Tidy: README file for better readability.
+
 ## 0.2.0:
 
 * Add: reads the actual group id from /etc/passwd rather than relying on
