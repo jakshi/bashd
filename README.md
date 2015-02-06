@@ -59,14 +59,14 @@
 ## Usage
 Add bashd cookbook to your metadata.rb dependency, like:
 
-```
+```ruby
 depends 'bashd', '~> 0.2.0'
 ```
 
 #### Install bashd
 Add to recipe:
 
-```
+```ruby
 bashd 'username'
 ```
 
@@ -87,7 +87,7 @@ To create new snippet:
 
 Add to your recipe:
 
-```
+```ruby
 bashd_entry 'snippet_name' do
   user 'username'
   action :create
@@ -100,7 +100,7 @@ end
 #### Delete snippet
 Add to your recipe:
 
-```
+```ruby
 bashd_entry 'snippet_name' do
   user 'username'
   action :remove
