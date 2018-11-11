@@ -22,4 +22,4 @@ actions :install
 
 default_action :install
 
-attribute :user, :kind_of => [String, NilClass], :name_attribute => true, :default => 'root'
+attribute :user, :kind_of => [String, NilClass], :name_attribute => true
